@@ -6,7 +6,7 @@ function Btns(props) {
         <button
         style={{ float: "right", marginBottom: 10 }} 
         className="btn" 
-        onClick={props.onClickHandle}
+        onClick={props.onClick}
         {...props} 
         >
         {props.children}

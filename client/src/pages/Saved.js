@@ -33,9 +33,9 @@ class Saved extends Component {
             desc={book.description}
             img={book.imageLinks.thumbnail}
             link={book.volumeInfo.previewLink}
-            data-value={book.id}
+            
             key={book.id}
-            onClickEffect={() => this.handleClickDelete(
+            onClick={() => this.handleClickDelete(
                 book.id
             )} />);
 

@@ -51,9 +51,9 @@ class Search extends Component {
             desc={book.description}
             img={book.volumeInfo.imageLinks.thumbnail} 
             link={book.volumeInfo.previewLink}  
-            data-value={book.id} 
+            
             key={book.id} 
-            onClickEffect={()=> this.handleClickSave({
+            onClick={()=> this.handleClickSave({
                 book_id: book.id,
                 title: book.volumeInfo.title,
                 authors : book.volumeInfo.author,

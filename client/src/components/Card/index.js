@@ -22,8 +22,8 @@ function Card(props) {
                 <h5 className="card-title"><a href={props.link}>{props.title}</a></h5>
                 <p>{props.authors}</p>
                 <p className="card-text">{props.desc}</p>
-                <Btn className="btn-success" onClick={props.onClickView}>View</Btn>
-                <Btn className="btn-danger" onClick={props.onClickEffect}>${
+                <Btn className="btn-success" data-value="view" onClick={props.onClick}>View</Btn>
+                <Btn className="btn-danger" data-value="save" onClick={props.onClick}>${
                     props.isSaved ? "Delete" : "Save"
 
                 }</Btn>

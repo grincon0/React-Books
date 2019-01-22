@@ -20,7 +20,7 @@ function SearchForm(props) {
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 
                 <Btns
-                onClickHandle={props.handleFormSubmit}
+                onClick={props.handleFormSubmit}
                 
                 >Search</Btns>
             
