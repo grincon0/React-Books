@@ -31,19 +31,32 @@ class Search extends Component {
                 this.setState({ results: res.data.items })
             }).catch(err => console.log(err));
     }
-    handleClickSave(id){
-        for(let i =0; i < this.state.results; i++){
-
-            if(this.state.results[i].id === id){
-                return API.saveBook()
-            }
-        }
+    handleClickSave(body){
+     API.saveBook(body).then(res => {
+          console.log(body);
+      }).catch(err => console.log(err));
 
         
     }
     render() {
 
-        let books = this.state.search.map( book => <Card title={book.volumeInfo.title} authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)} desc={book.description}img={book.imageLinks.thumbnail} link={book.selfLink}  data-value={book.id} onClickSave/>)
+        let books = this.state.search.map( book => <Card 
+            
+            title={book.volumeInfo.title} 
+            authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)} 
+            desc={book.description}
+            img={book.imageLinks.thumbnail} 
+            link={book.volumeInfo.previewLink}  
+            data-value={book.id} 
+            key={book.id} 
+            onClickSave={()=> this.handleClickSave({
+                book_id: book.id,
+                title: book.volumeInfo.title,
+                authors : book.volumeInfo.author,
+                desc : book.description,
+                img: book.imageLinks.thumbnail,
+                link: book.volumeInfo.previewLink
+            })}/>)
         return (
             <div>
                 <Container>
