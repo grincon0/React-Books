@@ -10,7 +10,7 @@ function NavBar(props) {
                     <a href="/">Bookster</a>
                 </li>
                 <li className="nav-item">
-                    <a href="/">Search</a>
+                    <a href="/search">Search</a>
                 </li>
                 <li className="nav-item">
                     <a href="/saved">Saved</a>
