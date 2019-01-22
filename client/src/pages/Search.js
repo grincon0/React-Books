@@ -14,6 +14,9 @@ class Search extends Component {
         saved:[],
         
     }
+    componentDidMount(){
+        this.loadDefaultBooks();
+    }
     loadDefaultBooks() {
         API.getDefaultGoogleBooks()
             .then(res => {
@@ -49,13 +52,14 @@ class Search extends Component {
             link={book.volumeInfo.previewLink}  
             data-value={book.id} 
             key={book.id} 
-            onClickSave={()=> this.handleClickSave({
+            onClickEffect={()=> this.handleClickSave({
                 book_id: book.id,
                 title: book.volumeInfo.title,
                 authors : book.volumeInfo.author,
                 desc : book.description,
                 img: book.imageLinks.thumbnail,
-                link: book.volumeInfo.previewLink
+                link: book.volumeInfo.previewLink,
+                saved: true
             })}/>)
         return (
             <div>

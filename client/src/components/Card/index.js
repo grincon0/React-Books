@@ -23,7 +23,10 @@ function Card(props) {
                 <p>{props.authors}</p>
                 <p className="card-text">{props.desc}</p>
                 <Btn className="btn-success" onClick={props.onClickView}>View</Btn>
-                <Btn className="btn-danger" onClick={props.onClickSave}>Save</Btn>
+                <Btn className="btn-danger" onClick={props.onClickEffect}>${
+                    props.isSaved ? "Delete" : "Save"
+
+                }</Btn>
             </div>
         </div>
 
