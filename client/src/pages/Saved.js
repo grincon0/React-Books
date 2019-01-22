@@ -17,7 +17,8 @@ class Saved extends Component {
         this.setState({ saved: books });
 
     }
-    handleClickDelete(id){
+    handleClickDelete(id,event){
+        event.preventDefault();
         API.deleteBook(id).then( res => this.loadSavedBooks());
         
 

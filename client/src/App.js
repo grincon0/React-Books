@@ -15,9 +15,9 @@ class App extends Component {
       <div className="App">
       <NavBar />
       <Wrapper>
-        <Router exact path="/" component={Search}/>
-        <Router exact path="/search" component={Search}/>
-        <Router exact path="/saved" component={Saved} />
+        <Route exact path="/" component={Search}/>
+        <Route exact path="/search" component={Search}/>
+        <Route exact path="/saved" component={Saved} />
         </Wrapper>
         <Footer />
       </div>

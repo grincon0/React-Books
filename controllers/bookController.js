@@ -8,7 +8,7 @@ module.exports = {
         db.Book.create(req.body).then(dbModel => res.json(dbModel)).catch(err => res.status(442).json(err) )
     },
     remove: function(req, res){
-        db.Book.remove({_id: req.params.id}).then(dbModel.remove()).then(dbMode => res.json(dbMode)).catch(err => res.status(442).json(err));
+        db.Book.remove({book_id: req.params.id}).then(dbModel.remove()).then(dbMode => res.json(dbMode)).catch(err => res.status(442).json(err));
     }
 
 

@@ -4,7 +4,7 @@ import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Hero from "../components/Hero";
-import SearchForm from "../components/SearchForm";
+import SearchForm from "../components/SearchForm/index";
 import API from "../utils/API";
 
 class Search extends Component {
@@ -42,13 +42,14 @@ class Search extends Component {
         
     }
     render() {
+    
 
-        let books = this.state.search.map( book => <Card 
+        let books = this.state.results.map( book => <Card 
             
             title={book.volumeInfo.title} 
             authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)} 
             desc={book.description}
-            img={book.imageLinks.thumbnail} 
+            img={book.volumeInfo.imageLinks.thumbnail} 
             link={book.volumeInfo.previewLink}  
             data-value={book.id} 
             key={book.id} 
@@ -57,7 +58,7 @@ class Search extends Component {
                 title: book.volumeInfo.title,
                 authors : book.volumeInfo.author,
                 desc : book.description,
-                img: book.imageLinks.thumbnail,
+                img: book.volumeInfo.imageLinks.thumbnail,
                 link: book.volumeInfo.previewLink,
                 saved: true
             })}/>)
@@ -66,7 +67,7 @@ class Search extends Component {
                 <Container>
                     <Hero />
                     <Row>
-                        <Col>
+                        <Col size="md-12">
                             <SearchForm
                                 handleInputChange={this.handleInputChange}
                                 handleFormSubmit={this.handleFormSubmit}
@@ -74,10 +75,11 @@ class Search extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col size="md-12">
                             {books}
                         </Col>
                     </Row>
+                    
                 </Container>
             </div>
         );

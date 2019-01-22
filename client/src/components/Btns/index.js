@@ -1,13 +1,18 @@
 import React from "react";
 import "./style.css";
 
-function Btn(props) {
+function Btns(props) {
     return (
-        <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn">
+        <button
+        style={{ float: "right", marginBottom: 10 }} 
+        className="btn" 
+        onClick={props.onClickHandle}
+        {...props} 
+        >
         {props.children}
         </button>
     );
 
 }
 
-export default Btn;
+export default Btns;

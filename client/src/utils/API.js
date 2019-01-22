@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export default{
-    getAllSavedBooks(){
+    getAllSavedBooks : function(){
         return axios.get("/api/getAll");
     },
-    deleteBook(id){
+    deleteBook : function(id){
         return axios.delete(`/api/${id}`);
     },
     saveBook: function(bookData){

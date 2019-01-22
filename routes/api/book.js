@@ -14,7 +14,7 @@ router.post("/api/books/", function (req, res){
 
 
 //route for deleting a specified book
-router.route("/:id")
+router.route("/api/:id")
     .delete(booksController.remove);
 
 module.exports = router;
