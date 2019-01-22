@@ -5,7 +5,7 @@ export default{
         return axios.get("/api/getAll");
     },
     deleteBook(id){
-        return axios.delete(`/api/books/${id}`);
+        return axios.delete(`/api/${id}`);
     },
     saveBook: function(bookData){
         return axios.post(`/api/books/`, bookData);

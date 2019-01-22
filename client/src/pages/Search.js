@@ -11,6 +11,7 @@ class Search extends Component {
     state = {
         search: "",
         results: [],
+        saved:[],
         
     }
     loadDefaultBooks() {
@@ -30,9 +31,19 @@ class Search extends Component {
                 this.setState({ results: res.data.items })
             }).catch(err => console.log(err));
     }
+    handleClickSave(id){
+        for(let i =0; i < this.state.results; i++){
+
+            if(this.state.results[i].id === id){
+                return API.saveBook()
+            }
+        }
+
+        
+    }
     render() {
 
-        let books = this.state.search.map( book => <Card img={book.imageLinks.thumbnail}  data-value={book.id} onClickView onClickSave/>)
+        let books = this.state.search.map( book => <Card title={book.volumeInfo.title} authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)} desc={book.description}img={book.imageLinks.thumbnail} link={book.selfLink}  data-value={book.id} onClickSave/>)
         return (
             <div>
                 <Container>
@@ -42,7 +53,6 @@ class Search extends Component {
                             <SearchForm
                                 handleInputChange={this.handleInputChange}
                                 handleFormSubmit={this.handleFormSubmit}
-
                             />
                         </Col>
                     </Row>
@@ -51,16 +61,10 @@ class Search extends Component {
                             {books}
                         </Col>
                     </Row>
-
                 </Container>
-
             </div>
-
-
         );
-
     }
-
 }
 
 

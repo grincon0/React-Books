@@ -19,8 +19,9 @@ function Card(props) {
             alt="book"
             />
             
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 className="card-title"><a href={props.link}>{props.title}</a></h5>
+                <p>{props.authors}</p>
+                <p className="card-text">{props.desc}</p>
                 <Btn className="btn-success" onClick={props.onClickView}>View</Btn>
                 <Btn className="btn-danger" onClick={props.onClickSave}>Save</Btn>
             </div>
