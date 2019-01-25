@@ -12,6 +12,14 @@ class Saved extends Component {
     state = {
         saved: []
     }
+    componentDidMount(){
+        if(!(this.state.saved < 1)){
+            this.loadSavedBooks();
+        }else{
+            return;
+        }
+        
+    }
     loadSavedBooks() {
         let books = API.getAllSavedBooks();
         this.setState({ saved: books });
@@ -43,9 +51,9 @@ class Saved extends Component {
             <div>
                 <Container>
                     <Row>
-                        <Col>
+                        <Col size="md-12">
                             {savedBooks}
-                        </Col>
+                        </Col> 
                     </Row>
 
                 </Container>

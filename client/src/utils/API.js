@@ -8,7 +8,7 @@ export default{
         return axios.delete(`/api/${id}`);
     },
     saveBook: function(bookData){
-        return axios.post(`/api/books/`, bookData);
+        return axios.post("/api/books", bookData);
     },
     getGoogleSearchBooks: function(query){
         return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=10`)

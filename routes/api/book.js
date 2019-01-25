@@ -6,7 +6,7 @@ router.route("/getAll")
 .get(bookController.findAll)
 .post(booksController.create);
 
-router.post("/api/books/", function (req, res){
+router.post("/api/books", function (req, res){
     bookController.create(req.body)
         .then(dbBook => res.json(dbBook));
 

@@ -9,6 +9,7 @@ function SearchForm(props) {
             <div className="form-group">
                 <label htmlFor="bookSearch">Book Search</label>
                 <input 
+                name="search"
                 value={props.search}
                 onChange={props.handleInputChange}
                 type="email"

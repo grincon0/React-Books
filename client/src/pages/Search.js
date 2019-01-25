@@ -15,7 +15,13 @@ class Search extends Component {
         
     }
     componentDidMount(){
-        this.loadDefaultBooks();
+
+        if(this.state.saved.length < 1){
+            this.loadDefaultBooks();
+        }else{
+            console.log('saved books exist');
+        }
+        
     }
     loadDefaultBooks() {
         API.getDefaultGoogleBooks()
@@ -26,7 +32,12 @@ class Search extends Component {
 
     }
     handleInputChange = event => {
-        this.setState({ search: event.target.search });
+        const { name, value } = event.target;
+
+       
+        this.setState({
+          [name]: value
+        });
     }
     handleFormSubmit = event => {
         API.getGoogleSearchBooks(this.state.search)
@@ -36,32 +47,63 @@ class Search extends Component {
     }
     handleClickSave(body){
      API.saveBook(body).then(res => {
-          console.log(body);
+
+        let newState = {...this.state};
+        newState.saved.push(res);
+
+        this.setState({newState});
       }).catch(err => console.log(err));
 
         
     }
+    checkIfSaved(obj){
+        for(let i = 0; i< this.state.results.length; i++){
+            if(obj[i] === this.state.results[i].id){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
     render() {
     
+        let books = this.state.results.map( book => 
+        
 
-        let books = this.state.results.map( book => <Card 
-            
+        this.checkIfSaved(this.state.saved) ? console.log('duplicate found') : 
+
+        <Card 
             title={book.volumeInfo.title} 
-            authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)} 
+            authors={book.volumeInfo.authors} 
             desc={book.description}
-            img={book.volumeInfo.imageLinks.thumbnail} 
+            img={book.volumeInfo.imageLinks ?
+                book.volumeInfo.imageLinks.thumbnail ?
+                book.volumeInfo.imageLinks.thumbnail
+                        : "https://hazlitt.net/sites/default/files/default-book.png"
+                : "https://hazlitt.net/sites/default/files/default-book.png"} 
             link={book.volumeInfo.previewLink}  
             
             key={book.id} 
             onClick={()=> this.handleClickSave({
                 book_id: book.id,
                 title: book.volumeInfo.title,
-                authors : book.volumeInfo.author,
+                authors : book.volumeInfo.authors,
                 desc : book.description,
-                img: book.volumeInfo.imageLinks.thumbnail,
+                img: book.volumeInfo.imageLinks ?
+                book.volumeInfo.imageLinks.thumbnail ?
+                book.volumeInfo.imageLinks.thumbnail
+                        : "https://hazlitt.net/sites/default/files/default-book.png"
+                : "https://hazlitt.net/sites/default/files/default-book.png",
                 link: book.volumeInfo.previewLink,
                 saved: true
-            })}/>)
+            })}
+            
+            
+            />
+            
+            
+            )
         return (
             <div>
                 <Container>
@@ -71,6 +113,7 @@ class Search extends Component {
                             <SearchForm
                                 handleInputChange={this.handleInputChange}
                                 handleFormSubmit={this.handleFormSubmit}
+                                search={this.state.search}
                             />
                         </Col>
                     </Row>
