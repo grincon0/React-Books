@@ -45,16 +45,20 @@ class Search extends Component {
                 this.setState({ results: res.data.items })
             }).catch(err => console.log(err));
     }
-    handleClickSave(body){
-     API.saveBook(body).then(res => {
+    handleClickSave = (event, body) => {
+ 
+        event.stopPropagation();
 
-        let newState = {...this.state};
-        newState.saved.push(res);
+        if(!this.state.saved.includes(body.book_id)){
 
-        this.setState({newState});
-      }).catch(err => console.log(err));
+            API.saveBook(body).then(res => {
 
+                let newState = {...this.state};
+                newState.saved.push(res);
         
+                this.setState({newState});
+              });
+        }
     }
     checkIfSaved(obj){
         for(let i = 0; i< this.state.results.length; i++){
@@ -71,8 +75,6 @@ class Search extends Component {
         let books = this.state.results.map( book => 
         
 
-        this.checkIfSaved(this.state.saved) ? console.log('duplicate found') : 
-
         <Card 
             title={book.volumeInfo.title} 
             authors={book.volumeInfo.authors} 
@@ -85,7 +87,7 @@ class Search extends Component {
             link={book.volumeInfo.previewLink}  
             
             key={book.id} 
-            onClick={()=> this.handleClickSave({
+            onClick={(event) => this.handleClickSave( event, ({
                 book_id: book.id,
                 title: book.volumeInfo.title,
                 authors : book.volumeInfo.authors,
@@ -97,7 +99,7 @@ class Search extends Component {
                 : "https://hazlitt.net/sites/default/files/default-book.png",
                 link: book.volumeInfo.previewLink,
                 saved: true
-            })}
+            }))}
             
             
             />

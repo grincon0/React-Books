@@ -13,46 +13,55 @@ class Saved extends Component {
         saved: []
     }
     componentDidMount(){
-        if(!(this.state.saved < 1)){
             this.loadSavedBooks();
-        }else{
-            return;
-        }
+
         
     }
     loadSavedBooks() {
-        let books = API.getAllSavedBooks();
-        this.setState({ saved: books });
+        API.getAllSavedBooks().then((res) =>
+            
+        
+         this.setState({ saved: res.data })
+         
+         
+         );
+        
 
     }
-    handleClickDelete(id,event){
-        event.preventDefault();
-        API.deleteBook(id).then( res => this.loadSavedBooks());
+    handleClickDelete(event, data){
+        event.stopPropagation();
+
+        console.log(data);
+        API.deleteBook(data.id).then((res) => this.loadSavedBooks());
+
         
 
     }
 
     render() {
 
-        let savedBooks = this.state.saved.map(book => <Card
-
-            title={book.volumeInfo.title}
-            authors={book.volumeInfo.authors.map(author => `${author ? author : ""}`)}
-            desc={book.description}
-            img={book.imageLinks.thumbnail}
-            link={book.volumeInfo.previewLink}
-            
-            key={book.id}
-            onClick={() => this.handleClickDelete(
-                book.id
-            )} />);
-
         return (
             <div>
                 <Container>
                     <Row>
                         <Col size="md-12">
-                            {savedBooks}
+                        {this.state.saved.length >= 1 ?
+            this.state.saved.map(book => <Card
+
+                title={book.title}
+                authors={book.authors}
+                img={book.image}
+                link={book.link}
+                issaved={book.saved}
+                key={book.book_id}
+                id={book.book_id}
+                onClick={(event) => this.handleClickDelete(event, {
+                    id: book.book_id
+                }
+                    
+                )} />)
+        :
+            console.log(this.state.saved)}
                         </Col> 
                     </Row>
 

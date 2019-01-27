@@ -11,22 +11,21 @@ function Card(props) {
                 Featured
         </div>
             <div className="card-body">
-            <img 
-            className="card-img-top"
-            data-value={props.id}
-            key={props.id}
-            src={props.img}
-            alt="book"
-            />
-            
+                <img
+                    className="card-img-top"
+                    data-value={props.id}
+                    key={props.id}
+                    src={props.img}
+                    alt="book"
+                />
+
                 <h5 className="card-title"><a href={props.link}>{props.title}</a></h5>
                 <p>{props.authors}</p>
                 <p className="card-text">{props.desc}</p>
-                <Btn className="btn-success" data-value="view" onClick={props.onClick}>View</Btn>
-                <Btn className="btn-danger" data-value="save" onClick={props.onClick}>${
-                    props.isSaved ? "Delete" : "Save"
 
-                }</Btn>
+                <button className="btn-danger" onClick={props.onClick}>
+                    {props.issaved ? "Delete" : "Save"}
+                </button>
             </div>
         </div>
 
