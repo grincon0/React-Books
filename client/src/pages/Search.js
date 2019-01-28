@@ -15,19 +15,29 @@ class Search extends Component {
         
     }
     componentDidMount(){
-        console.log(this.state.saved);
+        
 
-        if(this.state.saved.length < 1){
-            this.loadDefaultBooks();
-        }else{
-            console.log('saved books exist');
-        }
+     
+ 
+        this.getSavedBooksFromDB().then(this.loadDefaultBooks());
+
+        setTimeout(()=>{
+
+            console.log(this.state.results);
+            console.log(this.state.saved)
+        }, 1500);
         
     }
     loadDefaultBooks() {
         API.getDefaultGoogleBooks()
             .then(res => {
-                this.setState({ results: res.data.items });
+                let newState = {...this.state};
+
+
+                newState.results = (res.data.items);
+            
+
+                this.setState(newState);
                 console.log(this.state.results);
             })
             .catch(err => console.log(err));
@@ -51,7 +61,10 @@ class Search extends Component {
  
         event.stopPropagation();
 
-        if(!this.state.saved.includes(body.book_id)){
+
+
+
+        if(!this.checkIfSaved(body.book_id)){
 
             API.saveBook(body).then(res => {
 
@@ -61,60 +74,78 @@ class Search extends Component {
         
                 this.setState({newState});
               });
+        }else{
+            console.log("This a dulicated. cannot save");
         }
 
         console.log(this.state.saved);
     }
     checkIfSaved(arr){
         for(let i = 0; i< this.state.saved.length; i++){
-            if(arr.id === this.state.saved[i].book_id){
-                return true;
-            }
+        
+                if(arr.id === this.state.saved[i].book_id){
+                    return true;
+                }
+            
+
         }
 
         return false;
 
     }
- 
-    render() {
-    
-        let books = this.state.results.map( book => 
-            
-        (this.checkIfSaved(book)) ?
-        
-        console.log("Duplicate found") : 
-        
-        <Card 
-        title={book.volumeInfo.title} 
-        authors={book.volumeInfo.authors} 
-        desc={book.description}
-        img={book.volumeInfo.imageLinks ?
-            book.volumeInfo.imageLinks.thumbnail ?
-            book.volumeInfo.imageLinks.thumbnail
-                    : "https://hazlitt.net/sites/default/files/default-book.png"
-            : "https://hazlitt.net/sites/default/files/default-book.png"} 
-        link={book.volumeInfo.previewLink}  
-        
-        key={book.id} 
-        onClick={(event) => this.handleClickSave( event, ({
-            book_id: book.id,
-            title: book.volumeInfo.title,
-            authors : book.volumeInfo.authors,
-            desc : book.description,
-            image: book.volumeInfo.imageLinks ?
-            book.volumeInfo.imageLinks.thumbnail ?
-            book.volumeInfo.imageLinks.thumbnail
-                    : "https://hazlitt.net/sites/default/files/default-book.png"
-            : "https://hazlitt.net/sites/default/files/default-book.png",
-            link: book.volumeInfo.previewLink,
-            saved: true
-        }))}
-        
-        
-        />
-            
-            
+    getSavedBooksFromDB(){
+        return new Promise((resolve, reject) => {
+            API.getAllSavedBooks().then(
+                (res) =>{
+                    
+                    let newState = {...this.state}
+                    console.log('incoming avdd tata',res.data);
+                    newState.saved = (res.data);
+                    this.setState(newState);
+                }
             )
+        });
+    }
+    render() {
+        let books = this.state.results.map( book => 
+          
+            
+            (this.checkIfSaved(book)) ?
+            
+            console.log("Duplicate found") : 
+    
+            <Card 
+            title={book.volumeInfo.title} 
+            authors={book.volumeInfo.authors} 
+            desc={book.description}
+            img={book.volumeInfo.imageLinks ?
+                book.volumeInfo.imageLinks.thumbnail ?
+                book.volumeInfo.imageLinks.thumbnail
+                        : "https://hazlitt.net/sites/default/files/default-book.png"
+                : "https://hazlitt.net/sites/default/files/default-book.png"} 
+            link={book.volumeInfo.previewLink}  
+            
+            key={book.id} 
+            onClick={(event) => this.handleClickSave( event, ({
+                book_id: book.id,
+                title: book.volumeInfo.title,
+                authors : book.volumeInfo.authors,
+                desc : book.description,
+                image: book.volumeInfo.imageLinks ?
+                book.volumeInfo.imageLinks.thumbnail ?
+                book.volumeInfo.imageLinks.thumbnail
+                        : "https://hazlitt.net/sites/default/files/default-book.png"
+                : "https://hazlitt.net/sites/default/files/default-book.png",
+                link: book.volumeInfo.previewLink,
+                saved: true
+            }))}
+            
+            
+            />
+                
+                
+                )
+       
         return (
             <div>
                 <Container>
