@@ -15,6 +15,7 @@ class Search extends Component {
         
     }
     componentDidMount(){
+        console.log(this.state.saved);
 
         if(this.state.saved.length < 1){
             this.loadDefaultBooks();
@@ -27,6 +28,7 @@ class Search extends Component {
         API.getDefaultGoogleBooks()
             .then(res => {
                 this.setState({ results: res.data.items });
+                console.log(this.state.results);
             })
             .catch(err => console.log(err));
 
@@ -54,15 +56,18 @@ class Search extends Component {
             API.saveBook(body).then(res => {
 
                 let newState = {...this.state};
-                newState.saved.push(res);
+                newState.results = [];
+                newState.saved.push(res.data);
         
                 this.setState({newState});
               });
         }
+
+        console.log(this.state.saved);
     }
-    checkIfSaved(obj){
-        for(let i = 0; i< this.state.results.length; i++){
-            if(obj[i] === this.state.results[i].id){
+    checkIfSaved(arr){
+        for(let i = 0; i< this.state.saved.length; i++){
+            if(arr.id === this.state.saved[i].book_id){
                 return true;
             }
         }
@@ -70,39 +75,43 @@ class Search extends Component {
         return false;
 
     }
+ 
     render() {
     
         let books = this.state.results.map( book => 
+            
+        (this.checkIfSaved(book)) ?
         
-
+        console.log("Duplicate found") : 
+        
         <Card 
-            title={book.volumeInfo.title} 
-            authors={book.volumeInfo.authors} 
-            desc={book.description}
-            img={book.volumeInfo.imageLinks ?
-                book.volumeInfo.imageLinks.thumbnail ?
-                book.volumeInfo.imageLinks.thumbnail
-                        : "https://hazlitt.net/sites/default/files/default-book.png"
-                : "https://hazlitt.net/sites/default/files/default-book.png"} 
-            link={book.volumeInfo.previewLink}  
-            
-            key={book.id} 
-            onClick={(event) => this.handleClickSave( event, ({
-                book_id: book.id,
-                title: book.volumeInfo.title,
-                authors : book.volumeInfo.authors,
-                desc : book.description,
-                img: book.volumeInfo.imageLinks ?
-                book.volumeInfo.imageLinks.thumbnail ?
-                book.volumeInfo.imageLinks.thumbnail
-                        : "https://hazlitt.net/sites/default/files/default-book.png"
-                : "https://hazlitt.net/sites/default/files/default-book.png",
-                link: book.volumeInfo.previewLink,
-                saved: true
-            }))}
-            
-            
-            />
+        title={book.volumeInfo.title} 
+        authors={book.volumeInfo.authors} 
+        desc={book.description}
+        img={book.volumeInfo.imageLinks ?
+            book.volumeInfo.imageLinks.thumbnail ?
+            book.volumeInfo.imageLinks.thumbnail
+                    : "https://hazlitt.net/sites/default/files/default-book.png"
+            : "https://hazlitt.net/sites/default/files/default-book.png"} 
+        link={book.volumeInfo.previewLink}  
+        
+        key={book.id} 
+        onClick={(event) => this.handleClickSave( event, ({
+            book_id: book.id,
+            title: book.volumeInfo.title,
+            authors : book.volumeInfo.authors,
+            desc : book.description,
+            image: book.volumeInfo.imageLinks ?
+            book.volumeInfo.imageLinks.thumbnail ?
+            book.volumeInfo.imageLinks.thumbnail
+                    : "https://hazlitt.net/sites/default/files/default-book.png"
+            : "https://hazlitt.net/sites/default/files/default-book.png",
+            link: book.volumeInfo.previewLink,
+            saved: true
+        }))}
+        
+        
+        />
             
             
             )
