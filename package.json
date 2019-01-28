@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/grincon0/React-NYT-Search/issues"
   },
-  "homepage": "https://github.com/grincon0/React-NYT-Search#readme",
+  "homepage": "https://github.com/grincon0/React-NYT-Search/",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
