@@ -6,5 +6,25 @@
     margin-left: 1rem;
     margin-top: 1rem;
     
+   
 }
+
+.anim{
+    opacity: 0;
+
+    animation: fadeIn-a 0.5s 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn-a {
+    from{
+     bottom: 0;
+     opacity: 0;
+     height:0%;
+    }
+    to{
+     bottom:0;
+     opacity: 1;
+     height:535px;
+    }
+ }
 

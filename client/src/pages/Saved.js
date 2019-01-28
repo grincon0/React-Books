@@ -4,7 +4,6 @@ import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Hero from "../components/Hero";
-import SearchForm from "../components/SearchForm";
 import API from "../utils/API";
 
 

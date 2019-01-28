@@ -9,4 +9,24 @@
     color: white;
     text-align: center;
     margin-top: 2rem;
-  }
+}
+
+
+.fanim{
+    opacity: 0;
+
+    animation: fadeIn-b 0.4s 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn-b {
+    from{
+     bottom: 0;
+     opacity: 0;
+     height:0%;
+    }
+    to{
+     bottom:0;
+     opacity: 1;
+     height:100%;
+    }
+ }

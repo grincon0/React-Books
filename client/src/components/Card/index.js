@@ -5,7 +5,7 @@ import "./style.css";
 
 function Card(props) {
     return (
-        <div className="card" {...props}>
+        <div className="card anim" {...props}>
             <div className="card-header">
                 Featured
             </div>
