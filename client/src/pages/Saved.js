@@ -19,22 +19,17 @@ class Saved extends Component {
     }
     loadSavedBooks() {
         API.getAllSavedBooks().then((res) =>
-            
-        
          this.setState({ saved: res.data })
-         
-         
          );
         
 
     }
     handleClickDelete(event, data){
+
         event.stopPropagation();
 
         console.log(data);
-        API.deleteBook(data.id).then((res) => this.loadSavedBooks());
-
-        
+        API.deleteBook(data.id).then(() => this.loadSavedBooks());
 
     }
 

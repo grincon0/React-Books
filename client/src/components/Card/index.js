@@ -9,7 +9,7 @@ function Card(props) {
         <div className="card" {...props}>
             <div className="card-header">
                 Featured
-        </div>
+            </div>
             <div className="card-body">
                 <img
                     className="card-img-top"
