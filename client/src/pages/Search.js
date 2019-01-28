@@ -15,10 +15,6 @@ class Search extends Component {
         
     }
     componentDidMount(){
-        
-
-     
- 
         this.getSavedBooksFromDB().then(this.loadDefaultBooks());
 
         setTimeout(()=>{
@@ -99,7 +95,7 @@ class Search extends Component {
                 (res) =>{
                     
                     let newState = {...this.state}
-                    console.log('incoming avdd tata',res.data);
+                    console.log('incoming saved data',res.data);
                     newState.saved = (res.data);
                     this.setState(newState);
                 }
@@ -148,8 +144,9 @@ class Search extends Component {
        
         return (
             <div>
+                <Hero />
                 <Container>
-                    <Hero />
+                    
                     <Row>
                         <Col size="md-12">
                             <SearchForm

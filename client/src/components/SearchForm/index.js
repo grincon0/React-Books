@@ -18,7 +18,7 @@ function SearchForm(props) {
                 aria-describedby="emailHelp"
                 placeholder="Search for a book!"
                 />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                <small id="emailHelp" className="form-text text-muted"></small>
                 
                 <Btns
                 onClick={props.handleFormSubmit}

@@ -3,7 +3,7 @@ import "./style.css";
 
 function Hero(props){
     return(
-        <div className="hero" {...props}>
+        <div className="hero bgk" {...props}>
             <h1>Google Books Search</h1>
             <h5>Search and save your favorite literature</h5>
             {props.children}

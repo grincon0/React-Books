@@ -37,6 +37,7 @@ class Saved extends Component {
 
         return (
             <div>
+                <Hero />
                 <Container>
                     <Row>
                         <Col size="md-12">
