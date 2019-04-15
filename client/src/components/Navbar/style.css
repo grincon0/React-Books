@@ -12,7 +12,8 @@
 
 .new-nav-bar .nav-logo h1{
     color: #f3f3f3;
-    font-family: 'Open Sans';
+    font-family: Montserrat;
+    font-size: 30px;
 
 }
 .new-nav-list{
@@ -22,14 +23,17 @@
     transform: translate(-125px, 25px);
     font-family: Raleway;
     font-weight: 400;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: baseline;
 }
+
 
 .new-nav-list a{
     color: #f3f3f3;
     margin-right: 15px;
     margin-left: 15px;
     text-decoration: none;
+    top:100%;
 }
 
 @media screen and (max-width: 1570px){
