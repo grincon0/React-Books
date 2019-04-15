@@ -15,7 +15,7 @@ class Search extends Component {
         
     }
     componentDidMount(){
-        this.getSavedBooksFromDB().then(this.loadDefaultBooks());
+        /* this.getSavedBooksFromDB().then(this.loadDefaultBooks()); */
 
         setTimeout(()=>{
 

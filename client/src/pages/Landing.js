@@ -14,6 +14,10 @@ export default class Landing extends Component{
         //run transition anims by changing state
         //wait then change location href
         this.setState({transition : true});
+
+        setTimeout(()=> {
+            window.location = "/search";
+        },700)
     }
     render = () => {
         return(

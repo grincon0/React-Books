@@ -2,6 +2,7 @@
 
 button{
     overflow:hidden;
+    display: block;
     position: relative;
     text-decoration: none;
     border: 2px white solid;
@@ -16,11 +17,16 @@ button{
     cursor: pointer;
 }
 
-.landing-button{
-    transition: all 0.6s ease;
 
+button:before,
+button:after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+ 
+  transition-duration: 0.6s;
 }
-
 
 .landing-button:before{
     position: absolute;
@@ -28,10 +34,12 @@ button{
     height: 100%;
     left: -35%;
     top: 0;
+    transition-duration: 0.6s;
     transform: skew(50deg);
     transform-origin: top left;
+    
     width: 0;
-    transition: all 0.6s ease;
+  
     
 
 
@@ -42,26 +50,20 @@ button{
 .landing-button:hover:before{
     height: 100%;
     width: 135%;
-    transition: all 0.6s ease;
+    
 
     
 }
 
 
-
+button{
+    transition: all 0.6s ease;
+}
 button:hover{
     color: #0732f1;
-    transition: all 0.6s ease;
+    
     z-index: 8;
     
 }
 
-button:before,
-button:after {
-  background: #fff;
-  content: '';
-  position: absolute;
-  z-index: -1;
-  transition: all 0.6s ease;
- 
-}
+
