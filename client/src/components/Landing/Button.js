@@ -3,8 +3,8 @@ import "./styles/Button.css";
 
 export const Button = (props) => {
     return(
-        <button onClick={props.onClick} className={`landing-button`}>
-            Try Now
+        <button id={props.id} onClick={props.onClick} className={`landing-button`}>
+            Try it now
         </button>
     );
 }

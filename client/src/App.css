@@ -5,6 +5,11 @@
 
 body, html{
   background-image: radial-gradient(circle, rgba(94, 10, 10, 0.747), rgb(19, 8, 51));
+
+}
+
+html{
+  overflow: hidden;
 }
 
 a{

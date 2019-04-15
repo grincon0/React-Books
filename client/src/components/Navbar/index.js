@@ -10,10 +10,10 @@ import "./style.css";
             <div className={`nav-list-parent`}>
                 <ul className={`new-nav-list`}>
                     <li>
-                        <a href="#">Search</a>
+                        <a href="/search">Search</a>
                     </li>
                     <li>
-                        <a href="#">Saved</a>
+                        <a href="/saved">Saved</a>
                     </li>
                 </ul>
             </div>

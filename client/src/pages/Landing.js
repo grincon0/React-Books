@@ -13,14 +13,14 @@ export default class Landing extends Component{
 
         //run transition anims by changing state
         //wait then change location href
-
+        this.setState({transition : true});
     }
     render = () => {
         return(
             <section className={`no-overflow`} id="Landing">
-                <Flex classes={`flex-col-center full-height `}>
+                <Flex classes={`flex-col-center full-height ${this.state.transition ? "fade" : ""} `}>
                     <h1 className={`landing-header`}>Search and save your favorite books</h1>
-                    <Button />
+                    <Button id="landing-btn" onClick={this.handleClickEvent} />
                 </Flex>
             </section>
         );
