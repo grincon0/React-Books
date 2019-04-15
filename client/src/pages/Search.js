@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
-import Hero from "../components/Hero";
+
 import SearchForm from "../components/SearchForm/index";
 import API from "../utils/API";
 
@@ -144,7 +144,7 @@ class Search extends Component {
        
         return (
             <div>
-                <Hero />
+            
                 <Container>
                     
                     <Row>

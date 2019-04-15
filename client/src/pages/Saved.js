@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
-import Hero from "../components/Hero";
+
 import API from "../utils/API";
 
 
@@ -11,19 +11,19 @@ class Saved extends Component {
     state = {
         saved: []
     }
-    componentDidMount(){
-            this.loadSavedBooks();
+    componentDidMount() {
+        this.loadSavedBooks();
 
-        
+
     }
     loadSavedBooks() {
         API.getAllSavedBooks().then((res) =>
-         this.setState({ saved: res.data })
-         );
-        
+            this.setState({ saved: res.data })
+        );
+
 
     }
-    handleClickDelete(event, data){
+    handleClickDelete(event, data) {
 
         event.stopPropagation();
 
@@ -34,15 +34,8 @@ class Saved extends Component {
 
     render() {
 
-        return (
-            <div>
-                <Hero />
-                <Container>
-                    <Row>
-                        <Col size="md-12">
-                        {this.state.saved.length >= 1 ?
+        const items = this.state.saved.length >= 1 ?
             this.state.saved.map(book => <Card
-
                 title={book.title}
                 authors={book.authors}
                 img={book.image}
@@ -51,13 +44,17 @@ class Saved extends Component {
                 key={book.book_id}
                 id={book.book_id}
                 onClick={(event) => this.handleClickDelete(event, {
-                    id: book.book_id
-                }
-                    
-                )} />)
-        :
-            console.log(this.state.saved)}
-                        </Col> 
+                id: book.book_id})} />) 
+                : null
+
+        return (
+            <div>
+               
+                <Container>
+                    <Row>
+                        <Col size="md-12">
+                            {items}
+                        </Col>
                     </Row>
 
                 </Container>
