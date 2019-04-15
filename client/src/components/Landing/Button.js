@@ -4,7 +4,7 @@ import "./styles/Button.css";
 export const Button = (props) => {
     return(
         <button id={props.id} onClick={props.onClick} className={`landing-button`}>
-            Try it now
+            {props.value}
         </button>
     );
 }

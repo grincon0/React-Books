@@ -1,24 +1,37 @@
 .search-row{
     margin: 3rem;
-    
+}
+
+.form-group label{
+    color: #f3f3f3;
+    font-family: 'Open Sans', sans;
+    font-size: 30px;
     
 }
 
-.sanim{
+.form-group #searchHelp{
+    color: #f3f3f3;
+    font-family: Raleway, sans-serif;
+}
+.form-control{
+    width: 25vw;
+}
+
+.form-fade-in{
     opacity: 0;
 
-    animation: fadeIn-c 0.4s 0.2s ease-out forwards;
+    animation: fadeIn-c 0.6s ease forwards;
 }
 
 @keyframes fadeIn-c {
     from{
-     bottom: 0;
+     
      opacity: 0;
-     height:0%;
+     
     }
     to{
-     bottom:0;
+    
      opacity: 1;
-     height:100%;
+  
     }
  }

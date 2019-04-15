@@ -17,14 +17,14 @@ export default class Landing extends Component{
 
         setTimeout(()=> {
             window.location = "/search";
-        },700)
+        },600)
     }
     render = () => {
         return(
             <section className={`no-overflow`} id="Landing">
                 <Flex classes={`flex-col-center full-height ${this.state.transition ? "fade" : ""} `}>
                     <h1 className={`landing-header`}>Search and save your favorite books</h1>
-                    <Button id="landing-btn" onClick={this.handleClickEvent} />
+                    <Button id="landing-btn" onClick={this.handleClickEvent} value={`Try Now`} />
                 </Flex>
             </section>
         );
