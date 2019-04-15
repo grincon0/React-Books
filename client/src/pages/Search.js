@@ -18,11 +18,11 @@ class Search extends Component {
     componentDidMount() {
         /* this.getSavedBooksFromDB().then(this.loadDefaultBooks()); */
 
-        setTimeout(() => {
+    /*     setTimeout(() => {
 
             console.log(this.state.results);
             console.log(this.state.saved)
-        }, 1500);
+        }, 1500); */
 
     }
     loadDefaultBooks() {
@@ -110,9 +110,10 @@ class Search extends Component {
                 console.log("Duplicate found") :
 
                 <Card
+                    id={`card-${book.id}`}
                     title={book.volumeInfo.title}
                     authors={book.volumeInfo.authors}
-                    desc={book.description}
+                    desc={book.volumeInfo.subtitle}
                     img={book.volumeInfo.imageLinks ?
                         book.volumeInfo.imageLinks.thumbnail ?
                             book.volumeInfo.imageLinks.thumbnail
@@ -125,7 +126,7 @@ class Search extends Component {
                         book_id: book.id,
                         title: book.volumeInfo.title,
                         authors: book.volumeInfo.authors,
-                        desc: book.description,
+                        desc: book.volumeInfo.subtitle,
                         image: book.volumeInfo.imageLinks ?
                             book.volumeInfo.imageLinks.thumbnail ?
                                 book.volumeInfo.imageLinks.thumbnail
@@ -143,7 +144,7 @@ class Search extends Component {
 
         return (
             <section className={`no-overflow`} id="Search">
-                <Flex classes={`flex-col-center full-height ${this.state.transition ? "fade" : ""} `}>
+                <Flex classes={`flex-col-center  ${this.state.transition ? "fade" : ""} `}>
                     <SearchForm
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}

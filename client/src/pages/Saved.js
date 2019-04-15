@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import Card from "../components/Card";
 import Col from "../components/Col";
 import Container from "../components/Container";
+import Flex from "../components/Flex/index";
 import Row from "../components/Row";
 
 import API from "../utils/API";
+
+import "./styles/Saved.css";
 
 
 class Saved extends Component {
@@ -44,22 +47,21 @@ class Saved extends Component {
                 key={book.book_id}
                 id={book.book_id}
                 onClick={(event) => this.handleClickDelete(event, {
-                id: book.book_id})} />) 
-                : null
+                    id: book.book_id
+                })} />)
+            : null
 
         return (
-            <div>
-               
-                <Container>
-                    <Row>
-                        <Col size="md-12">
-                            {items}
-                        </Col>
-                    </Row>
+            <Flex classes={`flex-col-center`}>
+                <div className={`saved-header`}>
+                    <h1>Saved books</h1>
+                </div>
+                
 
-                </Container>
-            </div>
-
+                <div className={`saved-items`}>
+                    {items}
+                </div>
+            </Flex>
         );
     }
 
