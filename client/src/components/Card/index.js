@@ -26,7 +26,7 @@ export default class Card extends Component {
     }
     render = () => {
         return (
-            <div id={`${this.props.id}`} className={`card anim ${this.state.transition ? "rollback" : ""}`} {...this.props}>
+            <div id={`${this.props.id}`} className={`new-card anim ${this.state.transition ? "rollback" : ""}`} {...this.props}>
                 <div className="card-body">
                     <img
                         className="card-img-top"

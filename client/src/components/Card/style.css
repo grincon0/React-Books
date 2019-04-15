@@ -1,6 +1,6 @@
-.card{
-    width: 350px;
-    height:300px;
+.new-card{
+    width: 250px;
+    height:350px;
     position: relative;
     float: left;
     margin-left: 1rem;
@@ -12,7 +12,7 @@
 
 }
 
-.card.rollback{
+.new-card.rollback{
     transform-origin: 50%, 50%;
     /* transition: transform 0.5s ease;
     transform: scale(0); */
@@ -37,20 +37,42 @@
 .card-img-top{
     position: absolute;
     top: 0;
-    filter: brightness(70%)
+    filter: brightness(70%);
+    height:100%;
+    transition: all 0.6s ease;
+}
 
+.new-card:hover .card-img-top{
+    
+    filter: brightness(40%)
 }
 
 .card-text{
     position: absolute;
     display: none;
+    background: #ffffff;
 }
 
 .card-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
     position: absolute;
-    top:60%;
+    top:25%;
     font-family: 'Montserrat', sans-serif;
+    font-size:30px;
     font-weight: 700; 
+    background: black;
+    margin: 4px;
+    text-align: center;
+    padding: 5px;
+}
+
+h5.card-title a{
+    color: #f3f3f3;
+    padding-left: 5px;
+    padding-right:5px;
 }
 .card-header{
     display: flex;
@@ -60,8 +82,17 @@
 
 .card-body .card-authors{
     position: absolute;
-    top:65%;
+    top:50%;
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+p.card-authors{
+    color:white;
+    background: black;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-weight: 300;
 }
 
 .card-body{
@@ -79,25 +110,28 @@
 }
 
 .card-body button{
-    width: 50%;
+    width: 40%;
+    position: absolute;
+    top: 60%;
 }
+
 
 .anim{
     opacity: 0;
 
-    animation: fadeIn-a 0.5s 0.5s ease-out forwards;
+    animation: fadeIn-a 0.5s ease-out 0.5s  forwards;
 }
 
 @keyframes fadeIn-a {
     from{
-     bottom: 0;
+  
      opacity: 0;
-     height:0%;
+     
     }
     to{
-     bottom:0;
+     
      opacity: 1;
-     height:535px;
+     
     }
  }
 
