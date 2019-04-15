@@ -150,9 +150,10 @@ class Search extends Component {
                         handleFormSubmit={this.handleFormSubmit}
                         search={this.state.search}
                     />
-                    <div>
+                    <Flex classes={`flex-row-items`}>
                         {books}
-                    </div>
+                   
+                    </Flex>
                 </Flex>
             </section>
         );

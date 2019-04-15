@@ -20,6 +20,13 @@
     flex-direction: column
 }
 
+.flex-row-items{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .full-height{
     height:100vh;
 }

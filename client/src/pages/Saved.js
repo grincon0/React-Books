@@ -52,15 +52,15 @@ class Saved extends Component {
             : null
 
         return (
-            <Flex classes={`flex-col-center`}>
+            <Flex classes={`flex-col-center height-adjust`}>
                 <div className={`saved-header`}>
                     <h1>Saved books</h1>
                 </div>
                 
 
-                <div className={`saved-items`}>
+                <Flex classes={`flex-row-items height-adjust`}>
                     {items}
-                </div>
+                </Flex>
             </Flex>
         );
     }

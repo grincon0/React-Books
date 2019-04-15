@@ -3,6 +3,10 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.height-adjust{
+    transform: translateY(70px);
+}
+
 .saved-items{
     display: flex;
     flex-direction: row;
@@ -11,3 +15,4 @@
     flex-wrap: wrap;
     width: 80vw;
 }
+
