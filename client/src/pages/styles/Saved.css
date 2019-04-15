@@ -1,0 +1,13 @@
+.flex-col-center .saved-header h1{
+    color: #f3f3f3;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.saved-items{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    flex-wrap: wrap;
+    width: 80vw;
+}

@@ -1,0 +1,35 @@
+.flex{
+    display: flex;
+    width: 100vw;
+}
+
+.flex-col-center{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-center{
+    display:flex;
+    flex-direction: column
+}
+
+.full-height{
+    height:100vh;
+}
+
+.no-overflow{
+    overflow: hidden;
+}
+
+.landing-header{
+    font-family: Raleway, sans-serif;
+    font-size:25px;
+    color:#f3f3f3;
+}
