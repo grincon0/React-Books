@@ -2,28 +2,31 @@ import React, { Component } from "react";
 import Card from "../components/Card";
 import Col from "../components/Col";
 import Container from "../components/Container";
+import Flex from "../components/Flex/index";
 import Row from "../components/Row";
-import Hero from "../components/Hero";
+
 import API from "../utils/API";
+
+import "./styles/Saved.css";
 
 
 class Saved extends Component {
     state = {
         saved: []
     }
-    componentDidMount(){
-            this.loadSavedBooks();
+    componentDidMount() {
+        this.loadSavedBooks();
 
-        
+
     }
     loadSavedBooks() {
         API.getAllSavedBooks().then((res) =>
-         this.setState({ saved: res.data })
-         );
-        
+            this.setState({ saved: res.data })
+        );
+
 
     }
-    handleClickDelete(event, data){
+    handleClickDelete(event, data) {
 
         event.stopPropagation();
 
@@ -34,15 +37,8 @@ class Saved extends Component {
 
     render() {
 
-        return (
-            <div>
-                <Hero />
-                <Container>
-                    <Row>
-                        <Col size="md-12">
-                        {this.state.saved.length >= 1 ?
+        const items = this.state.saved.length >= 1 ?
             this.state.saved.map(book => <Card
-
                 title={book.title}
                 authors={book.authors}
                 img={book.image}
@@ -52,17 +48,20 @@ class Saved extends Component {
                 id={book.book_id}
                 onClick={(event) => this.handleClickDelete(event, {
                     id: book.book_id
-                }
-                    
-                )} />)
-        :
-            console.log(this.state.saved)}
-                        </Col> 
-                    </Row>
+                })} />)
+            : null
 
-                </Container>
-            </div>
+        return (
+            <Flex classes={`flex-col-center height-adjust`}>
+                <div className={`saved-header`}>
+                    <h1>Saved books</h1>
+                </div>
+                
 
+                <Flex classes={`flex-row-items height-adjust`}>
+                    {items}
+                </Flex>
+            </Flex>
         );
     }
 

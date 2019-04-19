@@ -1,26 +1,25 @@
 import React from "react";
 import "./style.css";
 
-function NavBar(props) {
+ const NavBar = (props) =>  {
     return (
-        <nav className="navbar navbar-expand-lg nav-back">
-
-            <ul className="navbar-nav full">
-                <li className="nav-item">
-                    <a href="/">Bookster</a>
-                </li>
-                <li className="nav-item">
-                    <a href="/search">Search</a>
-                </li>
-                <li className="nav-item">
-                    <a href="/saved">Saved</a>
-                </li>
-            </ul>
-
-            
+        <nav className={`new-nav-bar`}>
+            <div className={`nav-logo`}>
+                <h1>Bookster</h1>
+            </div>
+            <div className={`nav-list-parent`}>
+                <ul className={`new-nav-list`}>
+                    <li>
+                        <a href="/search">Search</a>
+                    </li>
+                    <li>
+                        <a href="/saved">Saved</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-
     );
 }
 
 export default NavBar;
+
