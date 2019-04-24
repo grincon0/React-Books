@@ -16,3 +16,8 @@
     width: 80vw;
 }
 
+.padding-fix{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+

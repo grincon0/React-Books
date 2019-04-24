@@ -7,7 +7,7 @@ function SearchForm(props) {
 
     return (
         <div>
-            <Flex classes={`flex-col-center form-group form-fade-in`}>
+            <Flex classes={`flex-col-center form-group form-fade-in ${props.animate ? "move-up" : "pre-move-position"}`}>
                 <label htmlFor="bookSearch">Book Search</label>
                 <input
                     name="search"

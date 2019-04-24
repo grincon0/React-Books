@@ -12,18 +12,48 @@ class Search extends Component {
     state = {
         search: "",
         results: [],
+        elements: [],
         saved: [],
+        animation: {
+            canFormMove: false,
+            canBooksAppear: false
+        }
 
     }
     componentDidMount() {
-        /* this.getSavedBooksFromDB().then(this.loadDefaultBooks()); */
 
-    /*     setTimeout(() => {
 
-            console.log(this.state.results);
-            console.log(this.state.saved)
-        }, 1500); */
+    }
+    componentDidUpdate = () => {
+     /*   if (this.state.animation.canFormMove && this.state.canBooksAppear === false) {
+            let newState = { ...this.state };
+            newState.animation.canBooksAppear = true;
+            this.setState(newState);
+            console.log(this.state);
+        }  */
+       /*  console.log("state updated");
+        if(this.state.animation.canFormMove){
+            this.addAnimationEndLisenter(".form-group", "transition", "first");
+        } */
+        
+    }
+    addAnimationEndLisenter = (query, type, which) => {
+        let element = document.querySelector(query);
 
+        element.addEventListener(`${type}end`, () => {
+
+            let newState = { ...this.state };
+
+            switch (which) {
+                case 'first':
+                    newState.animation.canBooksAppear = true;
+                    this.setState(newState);
+                    break;
+                default:
+
+                    break;
+            }
+        });
     }
     loadDefaultBooks() {
         API.getDefaultGoogleBooks()
@@ -52,23 +82,15 @@ class Search extends Component {
         API.getGoogleSearchBooks(this.state.search)
             .then(res => {
                 this.setState({ results: res.data.items })
-            }).catch(err => console.log(err));
+            }).then(() => this.handleSearchFormMovement()).catch(err => console.log(err));
     }
     handleClickSave = (event, body) => {
-
         event.stopPropagation();
-
-
-
-
         if (!this.checkIfSaved(body.book_id)) {
-
             API.saveBook(body).then(res => {
-
                 let newState = { ...this.state };
                 newState.results = [];
                 newState.saved.push(res.data);
-
                 this.setState({ newState });
             });
         } else {
@@ -77,22 +99,26 @@ class Search extends Component {
 
         console.log(this.state.saved);
     }
+    handleSearchFormMovement = () => {
+        if (this.state.animation.canFormMove === false) {
+            this.setState({ animation: { canFormMove: true } });
+        } else {
+            return;
+        }
+
+    }
     checkIfSaved(arr) {
         for (let i = 0; i < this.state.saved.length; i++) {
-
             if (arr.id === this.state.saved[i].book_id) {
                 return true;
             }
         }
-
         return false;
-
     }
     getSavedBooksFromDB() {
         return new Promise((resolve, reject) => {
             API.getAllSavedBooks().then(
                 (res) => {
-
                     let newState = { ...this.state }
                     console.log('incoming saved data', res.data);
                     newState.saved = (res.data);
@@ -101,58 +127,80 @@ class Search extends Component {
             )
         });
     }
-    render() {
-        let books = this.state.results.map(book =>
+    elementizeBooks = () => {
 
-
-            (this.checkIfSaved(book)) ?
-
-                console.log("Duplicate found") :
-
-                <Card
-                    id={`card-${book.id}`}
-                    title={book.volumeInfo.title}
-                    authors={book.volumeInfo.authors}
-                    desc={book.volumeInfo.subtitle}
-                    img={book.volumeInfo.imageLinks ?
-                        book.volumeInfo.imageLinks.thumbnail ?
-                            book.volumeInfo.imageLinks.thumbnail
-                            : "https://hazlitt.net/sites/default/files/default-book.png"
-                        : "https://hazlitt.net/sites/default/files/default-book.png"}
-                    link={book.volumeInfo.previewLink}
-
-                    key={book.id}
-                    onClick={(event) => this.handleClickSave(event, ({
-                        book_id: book.id,
-                        title: book.volumeInfo.title,
-                        authors: book.volumeInfo.authors,
-                        desc: book.volumeInfo.subtitle,
-                        image: book.volumeInfo.imageLinks ?
+        if(this.state.elements.length === 0){
+            let books = this.state.results.map(book =>
+                (this.checkIfSaved(book)) ?
+    
+                    console.log("Duplicate found") :
+    
+                    <Card
+                        id={`card-${book.id}`}
+                        title={book.volumeInfo.title}
+                        authors={book.volumeInfo.authors}
+                        desc={book.volumeInfo.subtitle}
+                        img={book.volumeInfo.imageLinks ?
                             book.volumeInfo.imageLinks.thumbnail ?
                                 book.volumeInfo.imageLinks.thumbnail
                                 : "https://hazlitt.net/sites/default/files/default-book.png"
-                            : "https://hazlitt.net/sites/default/files/default-book.png",
-                        link: book.volumeInfo.previewLink,
-                        saved: true
-                    }))}
+                            : "https://hazlitt.net/sites/default/files/default-book.png"}
+                        link={book.volumeInfo.previewLink}
+    
+                        key={book.id}
+                        onClick={(event) => this.handleClickSave(event, ({
+                            book_id: book.id,
+                            title: book.volumeInfo.title,
+                            authors: book.volumeInfo.authors,
+                            desc: book.volumeInfo.subtitle,
+                            image: book.volumeInfo.imageLinks ?
+                                book.volumeInfo.imageLinks.thumbnail ?
+                                    book.volumeInfo.imageLinks.thumbnail
+                                    : "https://hazlitt.net/sites/default/files/default-book.png"
+                                : "https://hazlitt.net/sites/default/files/default-book.png",
+                            link: book.volumeInfo.previewLink,
+                            saved: true
+                        }))}
+                    />
+            );
+            console.log(books);
+            let newState = {...this.state};
+            newState.elements = books;
+            this.setState(newState);
+        }else{
+            console.log("returning");
+            return;
+        }
+       
+    }
+    dumpBooks = () => {
+      if (this.state.animation.canFormMove) {
+        this.elementizeBooks();
+            console.log(this.state.elements);
+            let books = [...this.state.elements];
 
+            return books;
+        }else{
+            return;
+        } 
 
-                />
+    }
+    render() {
+        let books = this.dumpBooks();
 
-
-        )
+    
 
         return (
-            <section className={`no-overflow`} id="Search">
+            <section className={``} id="Search">
                 <Flex classes={`flex-col-center  ${this.state.transition ? "fade" : ""} `}>
                     <SearchForm
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                         search={this.state.search}
+                        animate={this.state.animation.canFormMove}
                     />
-                    <Flex classes={`flex-row-items`}>
-                        {books}
-                   
+                    <Flex classes={`flex-row-items padding-fix`}>
+                        {books ? books : ""}
                     </Flex>
                 </Flex>
             </section>

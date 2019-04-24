@@ -35,3 +35,12 @@
   
     }
  }
+
+ .move-up{
+     transition: all 0.6s ease;
+     transform: translateY(10px);
+ }
+
+ .pre-move-position{
+     transform: translateY(250px);
+ }

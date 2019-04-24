@@ -58,7 +58,7 @@ class Saved extends Component {
                 </div>
                 
 
-                <Flex classes={`flex-row-items height-adjust`}>
+                <Flex classes={`flex-row-items padding-fix`}>
                     {items}
                 </Flex>
             </Flex>

@@ -15,11 +15,11 @@ class App extends Component {
       <Router>
       <div className="App">
       <NavBar />
-      <Wrapper>
+      
         <Route exact path="/" component={Landing}/>
         <Route exact path="/search" component={Search}/>
         <Route exact path="/saved" component={Saved} />
-        </Wrapper>
+        
         {/* <Footer /> */}
       </div>
       </Router>
