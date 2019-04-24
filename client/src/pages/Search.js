@@ -24,19 +24,6 @@ class Search extends Component {
         this.getSavedBooksFromDB();
 
     }
-    componentDidUpdate = () => {
-     /*   if (this.state.animation.canFormMove && this.state.canBooksAppear === false) {
-            let newState = { ...this.state };
-            newState.animation.canBooksAppear = true;
-            this.setState(newState);
-            console.log(this.state);
-        }  */
-       /*  console.log("state updated");
-        if(this.state.animation.canFormMove){
-            this.addAnimationEndLisenter(".form-group", "transition", "first");
-        } */
-        
-    }
     addAnimationEndLisenter = (query, type, which) => {
         let element = document.querySelector(query);
 
@@ -97,7 +84,7 @@ class Search extends Component {
             console.log("This a dulicated. cannot save");
         }
 
-        console.log(this.state.saved);
+        
     }
     handleSearchFormMovement = () => {
         if (this.state.animation.canFormMove === false) {
@@ -130,7 +117,7 @@ class Search extends Component {
             API.getAllSavedBooks().then(
                 (res) => {
                     let newState = { ...this.state }
-                    console.log('incoming saved data', res.data);
+                    
                     newState.saved = (res.data);
                     this.setState(newState);
                 }
@@ -178,18 +165,13 @@ class Search extends Component {
                         }))}
                     />
             );
-            
-            /* let newState = {...this.state};
-            newState.elements = books;
-            this.setState(newState); */
+         
             return books;
         }
        
     }
     dumpBooks = () => {
       if (this.state.animation.canFormMove) {
-
-            console.log(this.state.elements);
             let books = [...this.state.elements];
 
             return books;

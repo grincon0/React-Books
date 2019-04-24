@@ -27,12 +27,8 @@ class Saved extends Component {
 
     }
     handleClickDelete(event, data) {
-
         event.stopPropagation();
-
-        console.log(data);
         API.deleteBook(data.id).then(() => this.loadSavedBooks());
-
     }
 
     render() {
