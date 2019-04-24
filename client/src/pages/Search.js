@@ -82,7 +82,10 @@ class Search extends Component {
         API.getGoogleSearchBooks(this.state.search)
             .then(res => {
                 this.setState({ results: res.data.items })
-            }).then(() => this.handleSearchFormMovement()).catch(err => console.log(err));
+            }).then(() => {
+                this.clearStateElements();
+                this.handleSearchFormMovement();
+            }).catch(err => console.log(err));
     }
     handleClickSave = (event, body) => {
         event.stopPropagation();
@@ -107,6 +110,7 @@ class Search extends Component {
         }
 
     }
+
     checkIfSaved(arr) {
         for (let i = 0; i < this.state.saved.length; i++) {
             if (arr.id === this.state.saved[i].book_id) {
@@ -114,6 +118,15 @@ class Search extends Component {
             }
         }
         return false;
+    }
+    clearStateElements = () => {
+        if(this.state.elements.length !== 0){
+            let newState = {...this.state}
+            newState.elements = [];
+            this.setState(newState);
+        }else{
+            return;
+        }
     }
     getSavedBooksFromDB() {
         return new Promise((resolve, reject) => {
