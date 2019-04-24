@@ -21,7 +21,7 @@ class Search extends Component {
 
     }
     componentDidMount() {
-
+        this.getSavedBooksFromDB();
 
     }
     componentDidUpdate = () => {
@@ -59,11 +59,7 @@ class Search extends Component {
         API.getDefaultGoogleBooks()
             .then(res => {
                 let newState = { ...this.state };
-
-
                 newState.results = (res.data.items);
-
-
                 this.setState(newState);
                 console.log(this.state.results);
             })
@@ -84,6 +80,7 @@ class Search extends Component {
                 this.setState({ results: res.data.items })
             }).then(() => {
                 this.clearStateElements();
+                this.getSavedBooksFromDB();
                 this.handleSearchFormMovement();
             }).catch(err => console.log(err));
     }
@@ -140,9 +137,14 @@ class Search extends Component {
             )
         });
     }
+    elementizeAndDump = () =>{
+        this.elementizeBooks();
+        this.dumpBooks();
+        
+    }
     elementizeBooks = () => {
-
-        if(this.state.elements.length === 0){
+        console.log('running elemetizintion again');
+        if(this.state.results.length !== 0){
             let books = this.state.results.map(book =>
                 (this.checkIfSaved(book)) ?
     
@@ -176,19 +178,17 @@ class Search extends Component {
                         }))}
                     />
             );
-            console.log(books);
-            let newState = {...this.state};
+            
+            /* let newState = {...this.state};
             newState.elements = books;
-            this.setState(newState);
-        }else{
-            console.log("returning");
-            return;
+            this.setState(newState); */
+            return books;
         }
        
     }
     dumpBooks = () => {
       if (this.state.animation.canFormMove) {
-        this.elementizeBooks();
+
             console.log(this.state.elements);
             let books = [...this.state.elements];
 
@@ -199,7 +199,7 @@ class Search extends Component {
 
     }
     render() {
-        let books = this.dumpBooks();
+        let books = this.elementizeBooks();
 
     
 
